@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Loop Tasks</title>
+    <link rel="stylesheet"
+        href="styles.css">
+</head>
+
+<body>
+    <h2>Task 1 - Factorial</h2>
+    <div class="input-box">
+        <span id="input-task-1-span">Input: </span>
+        <input type="text"
+            id="input-task-1"
+            class="input-box-text"
+            value="5" />
+    </div>
+    <div class="input-box">
+        <span id="task-1-result">Answer: </span>
+    </div>
+    <div class="input-box">
+        <button id="task-1-button"
+            class="button-box">Calculate</button>
+    </div>
+    <br>
+    <br>
+    <h2>Task 2 - Arithmetic Series</h2>
+    <div class="input-box">
+        <span id="input-task-2-span">Input: </span>
+        <input type="text"
+            id="input-task-2"
+            class="input-box-text"
+            value="5" />
+        <span id="input-task-2-description"></span>
+    </div>
+    <div class="input-box">
+        <span id="task-2-result">Answer: </span>
+    </div>
+    <div class="input-box">
+        <button id="task-2-button"
+            class="button-box">Calculate</button>
+    </div>
+    <br>
+    <br>
+    <h2>Task 3 - Odd and Even</h2>
+    <div class="input-box">
+        <span id="input-task-3-span">Input: </span>
+        <input type="text"
+            id="input-task-3"
+            class="input-box-text"
+            value="5" />
+    </div>
+    <div class="input-box">
+        <span id="task-3-result">Answer: </span>
+    </div>
+    <div class="input-box">
+        <span id="task-3-result-2"></span>
+    </div>
+    <div class="input-box">
+        <button id="task-3-button"
+            class="button-box">Calculate</button>
+    </div>
+    <script>
+        function setFactorialResult(
+            event,
+            inputID,
+            resultID
+        ) {
+            if (event.key === "Enter" || event.type === "click") {
+                // Prevent the default behavior (like submitting a form prematurely)
+                event.preventDefault();
+                let value = parseInt(document.getElementById(inputID).value, 10);
+                let result = 1;
+                if (value > 0) {
+                    while (value > 1) {
+                        result = result * value;
+                        value = value - 1;
+                    }
+                    document.getElementById(resultID).textContent = `Answer: ${parseInt(result, 10)}`;
+                }
+                else {
+                    document.getElementById(resultID).textContent = "Please input a postive integer.";
+                }
+            }
+        }
+
+        function setSumResult(
+            event,
+            inputID,
+            resultID,
+            descriptionID
+        ) {
+            if (event.key === "Enter" || event.type === "click") {
+                // Prevent the default behavior (like submitting a form prematurely)
+                event.preventDefault();
+                let value = parseInt(document.getElementById(inputID).value, 10);
+                let result = 0;
+                let i = 0;
+                if (i < value) {
+                    let description = `(N = ${value}: `;
+                    do {
+                        i = i + 1;
+                        result = result + i;
+                        description = `${description}${i} + `;
+                    } while (i < value - 1);
+
+                    if (value > 1) {
+                        i = i + 1;
+                        result = result + i;
+                        description = `${description}${i} = ${result})`;
+                    }
+                    else {
+                        description = `(N = 1: 1 = 1)`
+                    }
+                    document.getElementById(descriptionID).textContent = description;
+                    document.getElementById(resultID).textContent = `Answer: ${parseInt(result, 10)}`;
+                }
+                else {
+                    document.getElementById(descriptionID).textContent = "";
+                    document.getElementById(resultID).textContent = "Please input a postive integer.";
+                }
+            }
+        }
+
+        function setSumResult2(
+            event,
+            inputID,
+            resultID,
+            resultID2
+        ) {
+            if (event.key === "Enter" || event.type === "click") {
+                // Prevent the default behavior (like submitting a form prematurely)
+                event.preventDefault();
+                let value = parseInt(document.getElementById(inputID).value, 10);
+                let resultOdd = 0;
+                let resultEven = 0;
+                let i = 0;
+                if (i < value) {
+                    let arrayOdd = [];
+                    let arrayEven = [];
+                    let description = "";
+                    if (value > 1) {
+                        i = i + 1;
+                        while (i <= value) {
+                            if (i & 1) {
+                                resultOdd = resultOdd + i;
+                                arrayOdd.push(i);
+                            }
+                            else {
+                                resultEven = resultEven + i;
+                                arrayEven.push(i);
+                            }
+                            i = i + 1;
+                        }
+                        description = `(N = ${value}: ${arrayOdd.join(" + ")} = ${resultOdd} and ${arrayEven.join(" + ")} = ${resultEven})`;
+                    }
+                    else {
+                        resultOdd = 1;
+                        description = `(N = 1: 1 = 1)`;
+                    }
+                    document.getElementById(resultID).textContent = `Answer: Sum of Odd = ${parseInt(resultOdd, 10)}, Sum of Even = ${parseInt(resultEven, 10)}`;
+                    document.getElementById(resultID2).textContent = description;
+                }
+                else {
+                    document.getElementById(resultID).textContent = "Please input a postive integer.";
+                    document.getElementById(resultID2).textContent = "";
+                }
+            }
+        }
+
+        document.getElementById("input-task-1").addEventListener("keydown", (event) => {
+            setFactorialResult(
+                event = event,
+                inputID = "input-task-1",
+                resultID = "task-1-result"
+            )
+        });
+        document.getElementById("task-1-button").addEventListener("click", (event) => {
+            setFactorialResult(
+                event = event,
+                inputID = "input-task-1",
+                resultID = "task-1-result"
+            )
+        });
+
+        document.getElementById("input-task-2").addEventListener("keydown", (event) => {
+            setSumResult(
+                event = event,
+                inputID = "input-task-2",
+                resultID = "task-2-result",
+                descriptionID = "input-task-2-description"
+            )
+        });
+        document.getElementById("task-2-button").addEventListener("click", (event) => {
+            setSumResult(
+                event = event,
+                inputID = "input-task-2",
+                resultID = "task-2-result",
+                descriptionID = "input-task-2-description"
+            )
+        });
+
+        document.getElementById("input-task-3").addEventListener("keydown", (event) => {
+            setSumResult2(
+                event = event,
+                inputID = "input-task-3",
+                resultID = "task-3-result",
+                resultID2 = "task-3-result-2"
+            )
+        });
+        document.getElementById("task-3-button").addEventListener("click", (event) => {
+            setSumResult2(
+                event = event,
+                inputID = "input-task-3",
+                resultID = "task-3-result",
+                resultID2 = "task-3-result-2"
+            )
+        });
+
+    </script>
+</body>
+
+</html>
